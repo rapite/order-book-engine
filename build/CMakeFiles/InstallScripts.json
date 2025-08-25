@@ -1,0 +1,10 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/andy0/Projects/order-book-engine/build/cmake_install.cmake",
+		"/home/andy0/Projects/order-book-engine/build/_deps/googletest-build/cmake_install.cmake",
+		"/home/andy0/Projects/order-book-engine/build/_deps/googletest-build/googlemock/cmake_install.cmake",
+		"/home/andy0/Projects/order-book-engine/build/_deps/googletest-build/googletest/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

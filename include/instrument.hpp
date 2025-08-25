@@ -4,9 +4,9 @@
 // for the time being, this may be sufficient
 // add more if necessary
 enum class Instrument {
-    TAS,
-    TES,
-    ASDF
+    TAS, // The awesome store
+    TES, // The epic store
+    ASDF // asdf.
 };
 
 #endif

@@ -1,0 +1,5 @@
+if(EXISTS "/home/andy0/Projects/order-book-engine/build/order_tests[1]_tests.cmake")
+  include("/home/andy0/Projects/order-book-engine/build/order_tests[1]_tests.cmake")
+else()
+  add_test(order_tests_NOT_BUILT order_tests_NOT_BUILT)
+endif()

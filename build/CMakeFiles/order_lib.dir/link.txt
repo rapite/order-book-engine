@@ -1,0 +1,2 @@
+/usr/bin/ar qc liborder_lib.a CMakeFiles/order_lib.dir/src/order.cpp.o CMakeFiles/order_lib.dir/src/order_node.cpp.o
+/usr/bin/ranlib liborder_lib.a

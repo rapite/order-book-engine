@@ -40,9 +40,17 @@ class Order {
         Order(Order&&) = delete; // delete move constructor
         
         Order& operator=(Order&&) = delete; // delete move assignment
-        
+       
+        Side side() const { return side_; }
+        int price() const { return price_; }
+        int quantity() const { return quantity_; }
+        int remaining_quantity() const { return remaining_quantity_; }
+        OrderType type() const { return type_; }
+        TimeInForce tif() const { return tif_; }
+        Instrument sym() const {return sym_; }
+
         ~Order() = default;
-        
+
     private:
         Side side_;
         double price_;
