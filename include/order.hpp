@@ -28,10 +28,24 @@ enum class Side {
 
 class Order {
     public:
+        Order() = delete; // delete default constructor
+
+        // custom constructor to replace default constructor
+        Order(Side, double, int, OrderType, TimeInForce, Instrument);
+ 
+        Order(const Order&) = delete; // delete copy constructor
+        
+        Order& operator=(const Order&) = delete; // delete copy assignment
+        
+        Order(Order&&) = delete; // delete move constructor
+        
+        Order& operator=(Order&&) = delete; // delete move assignment
+        
+        ~Order() = default;
         
     private:
         Side side_;
-        int price_;
+        double price_;
         int quantity_;
         int remaining_quantity_;
         OrderType type_;
