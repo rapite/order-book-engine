@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <memory>
 #include "order.hpp"
 #include "order_book.hpp"
 
@@ -12,8 +13,17 @@ TEST(OrderBookTest, ConstructEmpty) {
 TEST(OrderBookTest, AddBuyOrderSetsBestBid) {
     OrderBook book(Instrument::TAS);
 
-    Order o1(Side::BUY, 100.0, 10, 1, OrderType::LIMIT, TimeInForce::GTC, Instrument::TAS);
-    book.add_order(o1);
+    auto o1 = std::make_unique<Order>(
+        Side::BUY,
+        100.0,
+        10,
+        1,
+        OrderType::LIMIT,
+        TimeInForce::GTC,
+        Instrument::TAS
+    );
+
+    book.new_order(std::move(o1));
 
     auto bid = book.best_bid();
     ASSERT_TRUE(bid.has_value());
@@ -24,8 +34,16 @@ TEST(OrderBookTest, AddBuyOrderSetsBestBid) {
 TEST(OrderBookTest, AddSellOrderSetsBestAsk) {
     OrderBook book(Instrument::TAS);
 
-    Order o1(Side::SELL, 101.0, 5, 1, OrderType::LIMIT, TimeInForce::GTC, Instrument::TAS);
-    book.add_order(o1);
+    auto o1 = std::make_unique<Order>(
+        Side::SELL,
+        101.0,
+        5,
+        1,
+        OrderType::LIMIT,
+        TimeInForce::GTC,
+        Instrument::TAS
+    );
+    book.new_order(std::move(o1));
 
     auto ask = book.best_ask();
     ASSERT_TRUE(ask.has_value());
@@ -36,8 +54,16 @@ TEST(OrderBookTest, AddSellOrderSetsBestAsk) {
 TEST(OrderBookTest, CancelOrderRemovesFromBook) {
     OrderBook book(Instrument::TAS);
 
-    Order o1(Side::BUY, 99.0, 10, 1, OrderType::LIMIT, TimeInForce::GTC, Instrument::TAS);
-    book.add_order(o1);
+    auto o1 = std::make_unique<Order>(
+        Side::BUY,
+        99.0,
+        10,
+        1,
+        OrderType::LIMIT,
+        TimeInForce::GTC,
+        Instrument::TAS
+    );
+    book.new_order(std::move(o1));
 
     // book.cancel_order(o1.id());
     EXPECT_FALSE(book.best_bid().has_value());
