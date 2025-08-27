@@ -1,8 +1,6 @@
 #ifndef ORDER_H
 #define ORDER_H
 
-#include "instrument.hpp"
-
 enum class OrderType {
     LIMIT,
     MARKET,
@@ -11,6 +9,12 @@ enum class OrderType {
     PEGGED,
     DISCRETIONARY_LIMIT,
     ICEBERG
+};
+
+enum class Instrument {
+    TAS, // The awesome store
+    TES, // The epic store
+    ASDF // asdf.
 };
 
 enum class TimeInForce {
@@ -43,6 +47,7 @@ public:
     
     Side GetSide() const { return side_; }
     int GetPrice() const { return price_; }
+    int GetID() const { return orderID_; }
     int GetQuantity() const { return quantity_; }
     int GetRemainingQuantity() const { return remaining_quantity_; }
     OrderType GetType() const { return type_; }

@@ -4,16 +4,13 @@
 #include <optional>
 #include "order.hpp"
 #include "order_node.hpp"
-#include "instrument.hpp"
 
 enum class ActionType {
     NEW_ORDER,
-    CANCEL_ORDER,
-    REPLACE_ORDER
+    CANCEL_ORDER
 };
 
-class OrderBook
-{
+class OrderBook {
 public:
     OrderBook(/* args */) = delete;
    
@@ -25,12 +22,11 @@ public:
    
     OrderBook& operator=(OrderBook&&) = delete; // move asignment
     
-    OrderBook(Instrument);
+    OrderBook(Instrument); // Book keep a new instrument
 
     // Add an order to an OrderBook
     // Reccomended to use std::move(order_object)
-    void add_order(Order&&);
-    void add_order(const Order&);
+    void new_order(std::unique_ptr<Order>); // take by value
 
     // Unhook orders from the map
     void cancel_order(int orderid);
@@ -40,20 +36,16 @@ public:
     std::optional<Order> best_bid() const;
 
     // return the best ask from the order book relative to an instrument
-    // It mayb e the case that the best bid does not exist
+    // It maybe the case that the best bid does not exist
     std::optional<Order> best_ask() const;
 
     ~OrderBook();
 private:
+    // <USERIDS, NODES>
     std::unordered_map<int, OrderNode*> id_map_;
-    std::map<double, std::deque<OrderNode>> price_levels_;
+
+    // <PRICE, FIFO<NODES>
+    std::map<double, std::deque<std::unique_ptr<OrderNode>>> price_levels_;
     Instrument sym_;
 };
 
-OrderBook::OrderBook(/* args */)
-{
-}
-
-OrderBook::~OrderBook()
-{
-}
