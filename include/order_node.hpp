@@ -2,21 +2,22 @@
 #define ORDER_NODE_HPP
 
 #include <chrono>
-
-enum class ActionType {
-    NEW_ORDER,
-    CANCEL_ORDER,
-    REPLACE_ORDER
-};
+#include <memory>
+#include "order.hpp"
 
 class OrderNode {
     public:
+        OrderNode() = delete;
+        OrderNode(const OrderNode&) = delete;
+        OrderNode& operator&=(const OrderNode&) = delete;
+        OrderNode(OrderNode&&) = delete;
+        OrderNode& operator&=(OrderNode&&) = delete;
+
+        
+        ~OrderNode();
     private:
         std::chrono::time_point<std::chrono::steady_clock, std::chrono::nanoseconds> timestamp_;
-        int orderid_;
-        ActionType action_;
-        OrderNode *next_;
-        OrderNode *prev_;
+        std::unique_ptr<Order> order_;
 };
 
 #endif
