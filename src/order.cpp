@@ -1,9 +1,10 @@
 #include <stdexcept>
 #include "order.hpp"
 
-Order::Order(Side side, double price, int quantity, OrderType type, TimeInForce tif, Instrument sym)
+Order::Order(Side side, double price, int orderID, int quantity, OrderType type, TimeInForce tif, Instrument sym)
     : side_(side),
       price_(price),
+      orderID_(orderID),
       quantity_(quantity),
       remaining_quantity_(quantity),
       type_(type),
