@@ -10,6 +10,7 @@ Order::Order(Side side, double price, int orderID, int quantity, OrderType type,
       type_(type),
       tif_(tif),
       sym_(sym) {
+        
     //constraints for valid prices and quantities
     if (price <= 0.0) {
         throw std::invalid_argument("Price must be positive");

@@ -13,11 +13,12 @@ class OrderNode {
         OrderNode(OrderNode&&) = delete;
         OrderNode& operator&=(OrderNode&&) = delete;
         
-        OrderNode(std::unique_ptr<Order> order)
+        OrderNode(std::unique_ptr<Order> o)
             : timestamp_(std::chrono::steady_clock::now()),
-            order_(std::move(order)) {}
+            order_(std::move(o)) {}
 
-        ~OrderNode();
+        const Order* GetOrder() const { return order_.get(); }
+        const auto& GetTimestamp() const { return timestamp_; }
     private:
         std::chrono::time_point<std::chrono::steady_clock, std::chrono::nanoseconds> timestamp_;
         std::unique_ptr<Order> order_;
